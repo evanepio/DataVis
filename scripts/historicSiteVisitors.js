@@ -26,7 +26,7 @@ HISTORIC_DATA = (function (w, d) {
         if (this.status == 200 && this.responseText !== null) {
             // success!
             updateStatus("Data loaded.");
-            historicData = this.responseText;
+            historicData = JSON.parse(this.responseText);
         } else {
             // something went wrong
             updateStatus("Terrible news. The data didn't load. Yikes.");
