@@ -41,6 +41,11 @@
     HISTORIC_DATA.loadData(function () {
         // Success! Load the chart!
         updateStatus(HISTORIC_DATA.getUniquePlaces());
+        var container = document.getElementById('chart');
+        var items = HISTORIC_DATA.getDataForLocation('Beaconsfield');
+
+        var dataset = new vis.DataSet(items);
+        var graph2d = new vis.Graph2d(container, dataset);
     }, function () {
         // Failure. WTF.
         updateStatus("Data failed to load. Check the console?");

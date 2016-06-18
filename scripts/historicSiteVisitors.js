@@ -16,7 +16,7 @@ HISTORIC_DATA = (function () {
 
         return dataArray;
     };
-    
+
     return {
         loadData: function (successCallback, errorCallback) {
             var xhr = new XMLHttpRequest();
@@ -43,6 +43,18 @@ HISTORIC_DATA = (function () {
             });
 
             return Object.keys(placeMap);
+        },
+        getDataForLocation: function (location) {
+            var placeData = historicData.filter(function (item) {
+                return item["Location"] === location;
+            });
+
+            return placeData.map(function (item) {
+                return {
+                    x: item["Year"] + "-" + item["Month"],
+                    y: item["Visitors"]
+                };
+            });
         }
     };
 }());
