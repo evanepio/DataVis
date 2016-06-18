@@ -12,6 +12,17 @@ HISTORIC_DATA = (function (w, d) {
         statusDiv.innerHTML = status;
     };
 
+    // Months are numbers, so we need to pad them with zeros
+    var normalizeMonths = function (dataArray) {
+        dataArray.forEach(function (item) {
+            if (item["Month"] && item["Month"].length === 1) {
+                item["Month"] = "0" + item["Month"];
+            }
+        });
+
+        return dataArray;
+    };
+
     var xhr = new XMLHttpRequest();
     xhr.addEventListener("progress", function (event) {
         if (event.lengthComputable) {
@@ -23,10 +34,10 @@ HISTORIC_DATA = (function (w, d) {
     });
 
     xhr.onload = function () {
-        if (this.status == 200 && this.responseText !== null) {
+        if (this.status == 200 && this.responseText) {
             // success!
             updateStatus("Data loaded.");
-            historicData = JSON.parse(this.responseText);
+            historicData = normalizeMonths(JSON.parse(this.responseText));
         } else {
             // something went wrong
             updateStatus("Terrible news. The data didn't load. Yikes.");
