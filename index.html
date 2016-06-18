@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Open Data - Historic sites visits on PEI 2004 to 2015</title>
+
+    <!-- vis.js stylesheet and code -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.css" />
+</head>
+
+<body>
+<header>
+    <h1>Historic sites visits on PEI 2004 to 2015</h1>
+    <p>A visualization of PEI Historic sites visits on PEI 2004 to 2015</p>
+</header>
+<article>
+    <div id="chart"> </div>
+    <div id="controls"></div>
+    <div id="status"></div>
+</article>
+
+<footer>
+    <div>
+        A visualization of <a href="https://www.princeedwardisland.ca/en/service/historic-site-visits-open-data"> this data set</a>,
+        licensed under the <a href="https://www.princeedwardisland.ca/en/information/finance/open-government-licence-prince-edward-island">
+        Open Government License - Prince Edward Island</a>
+    </div>
+    <div>Using the <code>vis.js</code> JavaScript library to render the graphs</div>
+</footer>
+<script type="text/javascript" src="scripts/historicSiteVisitors.js"></script>
+<script>
+    var container = document.getElementById('chart');
+    var items = [
+        {x: '2014-06-11', y: 10},
+        {x: '2014-06-12', y: 25},
+        {x: '2014-06-13', y: 30},
+        {x: '2014-06-14', y: 10},
+        {x: '2014-06-15', y: 15},
+        {x: '2014-06-16', y: 30}
+    ];
+
+    var dataset = new vis.DataSet(items);
+    var options = {
+        start: '2014-06-10',
+        end: '2014-06-18'
+    };
+    var graph2d = new vis.Graph2d(container, dataset, options);
+</script>
+</body>
+</html>
