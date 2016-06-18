@@ -24,14 +24,6 @@ HISTORIC_DATA = (function (w, d) {
     };
 
     var xhr = new XMLHttpRequest();
-    xhr.addEventListener("progress", function (event) {
-        if (event.lengthComputable) {
-            var percentComplete = event.loaded / event.total;
-            updateStatus("Percent loaded: " + percentComplete);
-        } else {
-            updateStatus("Percent loaded: unknowable?");
-        }
-    });
 
     xhr.onload = function () {
         if (this.status == 200 && this.responseText) {
