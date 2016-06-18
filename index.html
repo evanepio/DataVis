@@ -6,7 +6,7 @@
 
     <!-- vis.js stylesheet and code -->
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.css" />
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.css"/>
 </head>
 
 <body>
@@ -16,18 +16,35 @@
 </header>
 <article>
     <div id="status"></div>
-    <div id="chart"> </div>
+    <div id="chart"></div>
     <div id="controls"></div>
 </article>
 
 <footer>
     <div>
-        A visualization of <a href="https://www.princeedwardisland.ca/en/service/historic-site-visits-open-data"> this data set</a>,
-        licensed under the <a href="https://www.princeedwardisland.ca/en/information/finance/open-government-licence-prince-edward-island">
+        A visualization of <a href="https://www.princeedwardisland.ca/en/service/historic-site-visits-open-data"> this
+        data set</a>,
+        licensed under the <a
+            href="https://www.princeedwardisland.ca/en/information/finance/open-government-licence-prince-edward-island">
         Open Government License - Prince Edward Island</a>
     </div>
     <div>Using the <code>vis.js</code> JavaScript library to render the graphs</div>
 </footer>
 <script type="text/javascript" src="scripts/historicSiteVisitors.js"></script>
+<script>
+    // Put a new status message in the status div
+    var updateStatus = function (status) {
+        var statusDiv = document.getElementById('status');
+        statusDiv.innerHTML = status;
+    };
+
+    HISTORIC_DATA.loadData(function () {
+        // Success! Load the chart!
+        updateStatus(HISTORIC_DATA.getUniquePlaces());
+    }, function () {
+        // Failure. WTF.
+        updateStatus("Data failed to load. Check the console?");
+    });
+</script>
 </body>
 </html>

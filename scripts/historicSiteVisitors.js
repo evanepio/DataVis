@@ -1,16 +1,10 @@
 /**
  * Created by evanporter on 2016-06-18.
  */
-HISTORIC_DATA = (function (w, d) {
+HISTORIC_DATA = (function () {
     "use strict";
 
     var historicData = null;
-
-    // Put a new status message in the status div
-    var updateStatus = function (status) {
-        var statusDiv = d.getElementById('status');
-        statusDiv.innerHTML = status;
-    };
 
     // Months are numbers, so we need to pad them with zeros
     var normalizeMonths = function (dataArray) {
@@ -22,8 +16,7 @@ HISTORIC_DATA = (function (w, d) {
 
         return dataArray;
     };
-
-
+    
     return {
         loadData: function (successCallback, errorCallback) {
             var xhr = new XMLHttpRequest();
@@ -31,12 +24,10 @@ HISTORIC_DATA = (function (w, d) {
             xhr.onload = function () {
                 if (this.status == 200 && this.responseText) {
                     // success!
-                    updateStatus("Data loaded.");
                     historicData = normalizeMonths(JSON.parse(this.responseText));
                     successCallback();
                 } else {
                     // something went wrong
-                    updateStatus("Terrible news. The data didn't load. Yikes.");
                     errorCallback();
                 }
             };
@@ -54,4 +45,4 @@ HISTORIC_DATA = (function (w, d) {
             return Object.keys(placeMap);
         }
     };
-}(window, document));
+}());
