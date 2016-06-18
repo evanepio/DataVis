@@ -23,25 +23,26 @@ HISTORIC_DATA = (function (w, d) {
         return dataArray;
     };
 
-    var xhr = new XMLHttpRequest();
-
-    xhr.onload = function () {
-        if (this.status == 200 && this.responseText) {
-            // success!
-            updateStatus("Data loaded.");
-            historicData = normalizeMonths(JSON.parse(this.responseText));
-        } else {
-            // something went wrong
-            updateStatus("Terrible news. The data didn't load. Yikes.");
-        }
-    };
-
-    xhr.open("get", "data/historic_site_visitors.json", true);
-    xhr.send(null);
 
     return {
-        doneLoading: function () {
-            return !!historicData;
+        loadData: function (successCallback, errorCallback) {
+            var xhr = new XMLHttpRequest();
+
+            xhr.onload = function () {
+                if (this.status == 200 && this.responseText) {
+                    // success!
+                    updateStatus("Data loaded.");
+                    historicData = normalizeMonths(JSON.parse(this.responseText));
+                    successCallback();
+                } else {
+                    // something went wrong
+                    updateStatus("Terrible news. The data didn't load. Yikes.");
+                    errorCallback();
+                }
+            };
+
+            xhr.open("get", "data/historic_site_visitors.json", true);
+            xhr.send(null);
         },
         getUniquePlaces: function () {
             var placeMap = {};
