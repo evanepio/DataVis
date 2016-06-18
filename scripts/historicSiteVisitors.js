@@ -47,5 +47,9 @@ HISTORIC_DATA = (function (w, d) {
     xhr.open("get", "data/historic_site_visitors.json", true);
     xhr.send(null);
 
-    return {};
+    return {
+        doneLoading: function () {
+            return !!historicData;
+        }
+    };
 }(window, document));
