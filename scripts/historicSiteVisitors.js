@@ -42,6 +42,15 @@ HISTORIC_DATA = (function (w, d) {
     return {
         doneLoading: function () {
             return !!historicData;
+        },
+        getUniquePlaces: function () {
+            var placeMap = {};
+
+            historicData.forEach(function (item) {
+                placeMap[item["Location"]] = true;
+            });
+
+            return Object.keys(placeMap);
         }
     };
 }(window, document));
