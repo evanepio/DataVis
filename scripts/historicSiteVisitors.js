@@ -42,7 +42,7 @@ HISTORIC_DATA = (function () {
                 placeMap[item["Location"]] = true;
             });
 
-            return Object.keys(placeMap);
+            return Object.keys(placeMap).sort();
         },
         getDataForLocation: function (location) {
             var placeData = historicData.filter(function (item) {
@@ -53,6 +53,17 @@ HISTORIC_DATA = (function () {
                 return {
                     x: item["Year"] + "-" + item["Month"],
                     y: item["Visitors"]
+                };
+            });
+        },
+        getAllData: function () {
+            var locations = this.getUniquePlaces();
+
+            return historicData.map(function (item) {
+                return {
+                    x: item["Year"] + "-" + item["Month"],
+                    y: item["Visitors"],
+                    group: locations.indexOf(item["Location"])
                 };
             });
         }
