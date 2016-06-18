@@ -15,9 +15,7 @@
     <p>A visualization of PEI Historic sites visits on PEI 2004 to 2015</p>
 </header>
 <article>
-    <div id="status"></div>
     <div id="chart"></div>
-    <div id="controls"></div>
 </article>
 
 <footer>
@@ -32,15 +30,8 @@
 </footer>
 <script type="text/javascript" src="scripts/historicSiteVisitors.js"></script>
 <script>
-    // Put a new status message in the status div
-    var updateStatus = function (status) {
-        var statusDiv = document.getElementById('status');
-        statusDiv.innerHTML = status;
-    };
-
     HISTORIC_DATA.loadData(function () {
         // Success! Load the chart!
-        updateStatus("Data loaded.");
         var container = document.getElementById('chart');
         var locations = HISTORIC_DATA.getUniquePlaces();
         var items = HISTORIC_DATA.getAllData();
