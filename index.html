@@ -26,37 +26,10 @@
             href="https://www.princeedwardisland.ca/en/information/finance/open-government-licence-prince-edward-island">
         Open Government License - Prince Edward Island</a>
     </div>
+    <div>HTML from <a href="https://github.com/swhalley/EducationAttendance">Education Attendance visualization</a>.</div>
     <div>Using the <a href="http://visjs.org">vis.js</a> JavaScript library to render the graphs</div>
 </footer>
 <script type="text/javascript" src="scripts/historicSiteVisitors.js"></script>
-<script>
-    HISTORIC_DATA.loadData(function () {
-        // Success! Load the chart!
-        var container = document.getElementById('chart');
-        var locations = HISTORIC_DATA.getUniquePlaces();
-        var items = HISTORIC_DATA.getAllData();
-
-        var groups = new vis.DataSet();
-        locations.forEach(function (location, index) {
-            groups.add({
-                id: index,
-                content: location,
-            });
-        });
-
-        var dataset = new vis.DataSet(items);
-
-        var options = {
-            drawPoints: true,
-            dataAxis: {visible: false},
-            legend: true
-        };
-
-        var graph2d = new vis.Graph2d(container, dataset, groups, options);
-    }, function () {
-        // Failure. WTF.
-        updateStatus("Data failed to load. Check the console?");
-    });
-</script>
+<script type="text/javascript" src="scripts/app.js"></script>
 </body>
 </html>
