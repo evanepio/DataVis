@@ -29,4 +29,4 @@
         // Failure. WTF.
         document.getElementById("chart").innerHTML = "Error loading data.";
     });
-}())
+}());
