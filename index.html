@@ -55,7 +55,7 @@
         var graph2d = new vis.Graph2d(container, dataset, groups, options);
     }, function () {
         // Failure. WTF.
-        updateStatus("Data failed to load. Check the console?");
+        document.getElementById("chart").innerHTML = "Error loading data."
     });
 </script>
 </body>
