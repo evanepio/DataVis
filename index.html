@@ -45,7 +45,7 @@
             });
         });
 
-        var dataset = new vis.DataSet(items);
+        var dataSet = new vis.DataSet(items);
 
         var options = {
             drawPoints: true,
@@ -53,10 +53,10 @@
             legend: true
         };
 
-        var graph2d = new vis.Graph2d(container, dataset, groups, options);
+        var graph2d = new vis.Graph2d(container, dataSet, groups, options);
     }, function () {
         // Failure. WTF.
-        document.getElementById("chart").innerHTML = "Error loading data."
+        document.getElementById("chart").innerHTML = "Error loading data.";
     });
 </script>
 </body>
