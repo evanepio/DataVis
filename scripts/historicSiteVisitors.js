@@ -72,6 +72,8 @@ HISTORIC_DATA = (function () {
 
 (function () {
     HISTORIC_DATA.loadData(function () {
+        "use strict";
+
         // Success! Load the chart!
         var container = document.getElementById('chart');
         var locations = HISTORIC_DATA.getUniquePlaces();
