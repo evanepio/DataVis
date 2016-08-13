@@ -1,7 +1,7 @@
 /**
  * Created by evanporter on 2016-06-18.
  */
-HISTORIC_DATA = (function () {
+DATA_LOADER = (function () {
     "use strict";
 
     return {
@@ -49,7 +49,7 @@ HISTORIC_DATA = (function () {
         });
     };
 
-    HISTORIC_DATA.loadData("data/historic_site_visitors.json", function (historicData) {
+    DATA_LOADER.loadData("data/historic_site_visitors.json", function (historicData) {
         "use strict";
 
         // Success! Load the chart!
