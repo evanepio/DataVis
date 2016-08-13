@@ -1,4 +1,3 @@
-/*global vis*/
 (function () {
 
     var getUniquePlaces = function (historicData) {
@@ -31,7 +30,6 @@
         var locations = getUniquePlaces(historicData);
         var items = getAllData(historicData);
 
-        //noinspection JSUnresolvedFunction
         var groups = new vis.DataSet();
         locations.forEach(function (location, index) {
             groups.add({
@@ -40,7 +38,6 @@
             });
         });
 
-        //noinspection JSUnresolvedFunction
         var dataSet = new vis.DataSet(items);
 
         var options = {
@@ -49,7 +46,6 @@
             legend: true
         };
 
-        //noinspection JSUnresolvedFunction
         new vis.Graph2d(container, dataSet, groups, options);
     }, function () {
         // Failure. WTF.
