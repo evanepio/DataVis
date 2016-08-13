@@ -4,8 +4,6 @@
 HISTORIC_DATA = (function () {
     "use strict";
 
-    var data = null;
-
     return {
         loadData: function (dataUrl, successCallback, errorCallback, transformData) {
             var xhr = new XMLHttpRequest();
@@ -13,8 +11,8 @@ HISTORIC_DATA = (function () {
             xhr.onload = function () {
                 if (this.status == 200 && this.responseText) {
                     // success!
-                    data = transformData(JSON.parse(this.responseText));
-                    successCallback();
+                    var data = transformData(JSON.parse(this.responseText));
+                    successCallback(data);
                 } else {
                     // something went wrong
                     errorCallback();
@@ -23,50 +21,41 @@ HISTORIC_DATA = (function () {
 
             xhr.open("get", dataUrl, true);
             xhr.send(null);
-        },
-        getUniquePlaces: function () {
-            var placeMap = {};
-
-            data.forEach(function (item) {
-                placeMap[item["Location"]] = true;
-            });
-
-            return Object.keys(placeMap).sort();
-        },
-        getDataForLocation: function (location) {
-            var placeData = data.filter(function (item) {
-                return item["Location"] === location;
-            });
-
-            return placeData.map(function (item) {
-                return {
-                    x: item["Year"] + "-" + item["Month"],
-                    y: item["Visitors"]
-                };
-            });
-        },
-        getAllData: function () {
-            var locations = this.getUniquePlaces();
-
-            return data.map(function (item) {
-                return {
-                    x: item["Year"] + "-" + item["Month"],
-                    y: item["Visitors"],
-                    group: locations.indexOf(item["Location"])
-                };
-            });
         }
     };
 }());
 
 (function () {
-    HISTORIC_DATA.loadData("data/historic_site_visitors.json", function () {
+
+    var getUniquePlaces = function (historicData) {
+        var placeMap = {};
+
+        historicData.forEach(function (item) {
+            placeMap[item["Location"]] = true;
+        });
+
+        return Object.keys(placeMap).sort();
+    };
+
+    var getAllData = function (historicData) {
+        var locations = getUniquePlaces(historicData);
+
+        return historicData.map(function (item) {
+            return {
+                x: item["Year"] + "-" + item["Month"],
+                y: item["Visitors"],
+                group: locations.indexOf(item["Location"])
+            };
+        });
+    };
+
+    HISTORIC_DATA.loadData("data/historic_site_visitors.json", function (historicData) {
         "use strict";
 
         // Success! Load the chart!
         var container = document.getElementById('chart');
-        var locations = HISTORIC_DATA.getUniquePlaces();
-        var items = HISTORIC_DATA.getAllData();
+        var locations = getUniquePlaces(historicData);
+        var items = getAllData(historicData);
 
         var groups = new vis.DataSet();
         locations.forEach(function (location, index) {
