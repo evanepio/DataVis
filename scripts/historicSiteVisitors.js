@@ -10,12 +10,13 @@
         return Object.keys(placeMap).sort();
     };
 
-    var getAllData = function (historicData) {
+    var buildDataForGraph = function (historicData) {
         var locations = getUniquePlaces(historicData);
 
         return historicData.map(function (item) {
+            var month = item["Month"].length === 2 ? item["Month"] : "0" + item["Month"];
             return {
-                x: item["Year"] + "-" + item["Month"],
+                x: item["Year"] + "-" + month,
                 y: item["Visitors"],
                 group: locations.indexOf(item["Location"])
             };
@@ -28,7 +29,7 @@
         // Success! Load the chart!
         var container = document.getElementById('chart');
         var locations = getUniquePlaces(historicData);
-        var items = getAllData(historicData);
+        var items = buildDataForGraph(historicData);
 
         var groups = new vis.DataSet();
         locations.forEach(function (location, index) {
@@ -50,13 +51,5 @@
     }, function () {
         // Failure. WTF.
         document.getElementById("chart").innerHTML = "Error loading data.";
-    }, function (dataArray) {
-        dataArray.forEach(function (item) {
-            if (item["Month"] && item["Month"].length === 1) {
-                item["Month"] = "0" + item["Month"];
-            }
-        });
-
-        return dataArray;
     });
 }());
