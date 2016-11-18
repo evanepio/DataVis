@@ -35,12 +35,16 @@
         return dataPoints;
     };
 
-    DATA_LOADER.loadData("data/collisions/vehicle-collisions.json", function (collisionData) {
+    var promises = [DATA_LOADER.promiseData("data/collisions/vehicle-collisions.json"),
+        DATA_LOADER.promiseData("data/collisions/impaired-convictions.json"),
+        DATA_LOADER.promiseData("data/collisions/drivers-by-class.json")];
 
+    Promise.all(promises).then(function (results) {
+        console.log(results[0]);
         // Success! Load the chart!
         var container = document.getElementById('chart');
-        var collisionTypes = getCollisionTypes(collisionData);
-        var items = buildDataForGraph(collisionData);
+        var collisionTypes = getCollisionTypes(results[0]);
+        var items = buildDataForGraph(results[0]);
 
         var groups = new vis.DataSet();
         collisionTypes.forEach(function (collisionType, index) {
@@ -55,12 +59,13 @@
         var options = {
             drawPoints: true,
             dataAxis: {visible: false},
-            legend: true
+            legend: true,
+            height: '750px'
         };
 
         new vis.Graph2d(container, dataSet, groups, options);
-    }, function () {
-        // Failure. WTF.
+    }, function (error) {
         document.getElementById("chart").innerHTML = "Error loading data.";
+        console.error(error)
     });
 }());
