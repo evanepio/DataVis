@@ -40,7 +40,6 @@
         DATA_LOADER.promiseData("data/collisions/drivers-by-class.json")];
 
     Promise.all(promises).then(function (results) {
-        console.log(results[0]);
         // Success! Load the chart!
         var container = document.getElementById('chart');
         var collisionTypes = getCollisionTypes(results[0]);
