@@ -11,7 +11,7 @@
         return Object.keys(placeMap).sort();
     };
 
-    var buildDataForGraph = function (collisionData) {
+    var buildCollisionDataForGraph = function (collisionData) {
         var collisionTypes = getCollisionTypes(collisionData);
         var dataPoints = [];
 
@@ -43,7 +43,7 @@
         // Success! Load the chart!
         var container = document.getElementById('chart');
         var collisionTypes = getCollisionTypes(results[0]);
-        var items = buildDataForGraph(results[0]);
+        var items = buildCollisionDataForGraph(results[0]);
 
         var groups = new vis.DataSet();
         collisionTypes.forEach(function (collisionType, index) {
