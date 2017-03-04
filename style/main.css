@@ -1,0 +1,9 @@
+div#controls {
+    background-color: rgb(106, 191, 255);
+    margin: 2em;
+    padding: 1em;
+    border-style: solid;
+    border-color: rgb(62, 142, 255);
+    border-width: 5px;
+    border-radius: 15px;;
+}
