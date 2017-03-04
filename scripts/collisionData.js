@@ -39,16 +39,17 @@
             .concat(getDataTypes(results[1], "Criminal Code Charges"))
             .concat(getDataTypes(results[2], "License"));
 
+        allGroups.sort();
 
         var items = buildDataForGraph(results[0], allGroups, "Collision Fatalities")
             .concat(buildDataForGraph(results[1], allGroups, "Criminal Code Charges"))
             .concat(buildDataForGraph(results[2], allGroups, "License"));
 
         var groups = new vis.DataSet();
-        allGroups.forEach(function (collisionType, index) {
+        allGroups.forEach(function (groupName, index) {
             groups.add({
                 id: index,
-                content: collisionType
+                content: groupName
             });
         });
 
