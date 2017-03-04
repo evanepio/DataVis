@@ -21,3 +21,7 @@ footer, header {
 footer div {
     margin: 1em;
 }
+
+header div {
+    text-align: center;
+}
