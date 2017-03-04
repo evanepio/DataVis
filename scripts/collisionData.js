@@ -61,6 +61,33 @@
         return dataPoints;
     };
 
+    var getDUITypes = function (duiData) {
+        return duiData.map(function (duiDatum) {
+            return duiDatum["Criminal Code Charges"];
+        });
+    };
+
+    var buildDUIDataForGraph = function (duiData, allGroups) {
+        var dataPoints = [];
+
+        duiData.forEach(function (duiDatum) {
+            var duiType = duiDatum["Criminal Code Charges"];
+            var iterableKeys = Object.keys(duiDatum).filter(function (key) {
+                return key !== "Criminal Code Charges";
+            });
+
+            iterableKeys.forEach(function (key) {
+                dataPoints.push({
+                    x: key.split("-")[0],
+                    y: duiDatum[key].split(",").join(""),
+                    group: allGroups.indexOf(duiType)
+                });
+            });
+        });
+
+        return dataPoints;
+    };
+
     var promises = [DATA_LOADER.promiseData("data/collisions/vehicle-collisions.json"),
         DATA_LOADER.promiseData("data/collisions/impaired-convictions.json"),
         DATA_LOADER.promiseData("data/collisions/drivers-by-class.json")];
@@ -70,10 +97,12 @@
         var container = document.getElementById('chart');
 
         var allGroups = getCollisionTypes(results[0])
+            .concat(getDUITypes(results[1]))
             .concat(getDriverClasses(results[2]));
 
 
         var items = buildCollisionDataForGraph(results[0], allGroups)
+            .concat(buildDUIDataForGraph(results[1], allGroups))
             .concat(buildDriverDataForGraph(results[2], allGroups));
 
         var groups = new vis.DataSet();
