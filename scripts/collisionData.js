@@ -45,6 +45,10 @@
             .concat(buildDataForGraph(results[1], allGroups, "Criminal Code Charges"))
             .concat(buildDataForGraph(results[2], allGroups, "License"));
 
+        items = items.filter(function (item) {
+            return item.x > "2006";
+        });
+
         var groups = new vis.DataSet();
         allGroups.forEach(function (groupName, index) {
             groups.add({
