@@ -24,41 +24,19 @@
         return dataPoints;
     };
 
-    var buildDriverDataForGraph = function (driverData, allGroups) {
+    var buildDataForGraph = function (data, allGroups, mainKey) {
         var dataPoints = [];
 
-        driverData.forEach(function (driverDatum) {
-            var driverClass = driverDatum["License"];
-            var nonLicenseKeys = Object.keys(driverDatum).filter(function (key) {
-                return key !== "License";
+        data.forEach(function (datum) {
+            var dataKeys = Object.keys(datum).filter(function (key) {
+                return key !== mainKey;
             });
 
-            nonLicenseKeys.forEach(function (key) {
+            dataKeys.forEach(function (key) {
                 dataPoints.push({
                     x: key.split("-")[0],
-                    y: driverDatum[key].split(",").join(""),
-                    group: allGroups.indexOf(driverClass)
-                });
-            });
-        });
-
-        return dataPoints;
-    };
-
-    var buildDUIDataForGraph = function (duiData, allGroups) {
-        var dataPoints = [];
-
-        duiData.forEach(function (duiDatum) {
-            var duiType = duiDatum["Criminal Code Charges"];
-            var iterableKeys = Object.keys(duiDatum).filter(function (key) {
-                return key !== "Criminal Code Charges";
-            });
-
-            iterableKeys.forEach(function (key) {
-                dataPoints.push({
-                    x: key.split("-")[0],
-                    y: duiDatum[key].split(",").join(""),
-                    group: allGroups.indexOf(duiType)
+                    y: datum[key].split(",").join(""),
+                    group: allGroups.indexOf(datum[mainKey])
                 });
             });
         });
@@ -86,8 +64,8 @@
 
 
         var items = buildCollisionDataForGraph(results[0], allGroups)
-            .concat(buildDUIDataForGraph(results[1], allGroups))
-            .concat(buildDriverDataForGraph(results[2], allGroups));
+            .concat(buildDataForGraph(results[1], allGroups, "Criminal Code Charges"))
+            .concat(buildDataForGraph(results[2], allGroups, "License"));
 
         var groups = new vis.DataSet();
         allGroups.forEach(function (collisionType, index) {
