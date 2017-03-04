@@ -1,16 +1,6 @@
 (function () {
     "use strict";
 
-    var getCollisionTypes = function (collisionData) {
-        var placeMap = {};
-
-        collisionData.forEach(function (item) {
-            placeMap[item["Collision Fatalities"]] = true;
-        });
-
-        return Object.keys(placeMap).sort();
-    };
-
     var buildCollisionDataForGraph = function (collisionData, allGroups) {
         var dataPoints = [];
 
@@ -90,7 +80,7 @@
         // Success! Load the chart!
         var container = document.getElementById('chart');
 
-        var allGroups = getCollisionTypes(results[0])
+        var allGroups = getDataTypes(results[0], "Collision Fatalities")
             .concat(getDataTypes(results[1], "Criminal Code Charges"))
             .concat(getDataTypes(results[2], "License"));
 
