@@ -1,19 +1,19 @@
 div#controls {
-    background-color: rgb(206, 116, 255);
+    background-color: rgb(132, 238, 255);
     margin: 2em;
     padding: 1em;
     border-style: solid;
-    border-color: rgb(172, 98, 255);
+    border-color: rgb(133, 219, 255);
     border-width: 5px;
     border-radius: 15px;;
 }
 
 footer, header {
-    background-color: silver;
+    background-color: #ffdbb6;
     margin: 1em;
     padding: 1em;
     border-style: solid;
-    border-color: gray;
+    border-color: #e8c8a5;
     border-width: 5px;
     border-radius: 5px;;
 }
