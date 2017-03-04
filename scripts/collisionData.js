@@ -63,7 +63,8 @@
             drawPoints: true,
             dataAxis: {visible: false},
             legend: true,
-            height: '750px'
+            height: '750px',
+            zoomable: false
         };
 
         var theGraph = new vis.Graph2d(container, dataSet, groups, options);
