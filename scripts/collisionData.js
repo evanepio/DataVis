@@ -11,8 +11,7 @@
         return Object.keys(placeMap).sort();
     };
 
-    var buildCollisionDataForGraph = function (collisionData) {
-        var collisionTypes = getCollisionTypes(collisionData);
+    var buildCollisionDataForGraph = function (collisionData, allGroups) {
         var dataPoints = [];
 
         var years = Object.keys(collisionData[0]).filter(function (collisionType) {
@@ -25,10 +24,37 @@
                     dataPoints.push({
                         x: year,
                         y: collisionType[year].split(',').join(''),
-                        group: collisionTypes.indexOf(collisionType["Collision Fatalities"])
+                        group: allGroups.indexOf(collisionType["Collision Fatalities"])
                     });
                 }
 
+            });
+        });
+
+        return dataPoints;
+    };
+
+    var getDriverClasses = function (driverData) {
+        return driverData.map(function (driverDatum) {
+            return driverDatum["License"];
+        });
+    };
+
+    var buildDriverDataForGraph = function (driverData, allGroups) {
+        var dataPoints = [];
+
+        driverData.forEach(function (driverDatum) {
+            var driverClass = driverDatum["License"];
+            var nonLicenseKeys = Object.keys(driverDatum).filter(function (key) {
+                return key !== "License";
+            });
+
+            nonLicenseKeys.forEach(function (key) {
+                dataPoints.push({
+                    x: key.split("-")[0],
+                    y: driverDatum[key].split(",").join(""),
+                    group: allGroups.indexOf(driverClass)
+                });
             });
         });
 
@@ -42,11 +68,16 @@
     Promise.all(promises).then(function (results) {
         // Success! Load the chart!
         var container = document.getElementById('chart');
-        var collisionTypes = getCollisionTypes(results[0]);
-        var items = buildCollisionDataForGraph(results[0]);
+
+        var allGroups = getCollisionTypes(results[0])
+            .concat(getDriverClasses(results[2]));
+
+
+        var items = buildCollisionDataForGraph(results[0], allGroups)
+            .concat(buildDriverDataForGraph(results[2], allGroups));
 
         var groups = new vis.DataSet();
-        collisionTypes.forEach(function (collisionType, index) {
+        allGroups.forEach(function (collisionType, index) {
             groups.add({
                 id: index,
                 content: collisionType
