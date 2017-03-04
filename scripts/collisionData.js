@@ -1,29 +1,6 @@
 (function () {
     "use strict";
 
-    var buildCollisionDataForGraph = function (collisionData, allGroups) {
-        var dataPoints = [];
-
-        var years = Object.keys(collisionData[0]).filter(function (collisionType) {
-            return collisionType !== "Collision Fatalities";
-        });
-
-        collisionData.forEach(function (collisionType) {
-            years.forEach(function (year) {
-                if (!isNaN(year)) {
-                    dataPoints.push({
-                        x: year,
-                        y: collisionType[year].split(',').join(''),
-                        group: allGroups.indexOf(collisionType["Collision Fatalities"])
-                    });
-                }
-
-            });
-        });
-
-        return dataPoints;
-    };
-
     var buildDataForGraph = function (data, allGroups, mainKey) {
         var dataPoints = [];
 
@@ -63,7 +40,7 @@
             .concat(getDataTypes(results[2], "License"));
 
 
-        var items = buildCollisionDataForGraph(results[0], allGroups)
+        var items = buildDataForGraph(results[0], allGroups, "Collision Fatalities")
             .concat(buildDataForGraph(results[1], allGroups, "Criminal Code Charges"))
             .concat(buildDataForGraph(results[2], allGroups, "License"));
 
