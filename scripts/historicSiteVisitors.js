@@ -47,7 +47,9 @@
             legend: true
         };
 
-        new vis.Graph2d(container, dataSet, groups, options);
+        var theGraph = new vis.Graph2d(container, dataSet, groups, options);
+
+        VISIBILTIY_CONTROLS.addVisibilityControlsToDOM("controls", locations, theGraph);
     }, function () {
         // Failure. WTF.
         document.getElementById("chart").innerHTML = "Error loading data.";
