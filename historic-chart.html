@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Open Data - Historic sites visits on PEI 2004 to 2015</title>
+    <meta charset="utf-8" />
+
+    <!-- Chart.js stylesheet and code -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="style/main.css"/>
+</head>
+
+<body>
+<header>
+    <h1>Historic sites visits on PEI 2004 to 2015</h1>
+    <p>A visualization of PEI Historic sites visits on PEI 2004 to 2015</p>
+    <div><a href="index.html">Back</a></div>
+</header>
+<article>
+    <canvas id="chart"></canvas>
+</article>
+
+<footer>
+    <div>
+        A visualization of <a href="https://www.princeedwardisland.ca/en/service/historic-site-visits-open-data"> this
+        data set</a>,
+        licensed under the <a
+            href="https://www.princeedwardisland.ca/en/information/finance/open-government-licence-prince-edward-island">
+        Open Government License - Prince Edward Island</a>
+    </div>
+    <div>HTML from <a href="https://github.com/swhalley/EducationAttendance">Education Attendance visualization</a>.</div>
+    <div>Using the <a href="http://visjs.org">vis.js</a> JavaScript library to render the graphs</div>
+    <div><a href="index.html">Back to Index of Visualizations</a></div>
+</footer>
+<script type="text/javascript" src="scripts/dataLoader.js"></script>
+<script type="text/javascript" src="scripts/historicChart.js"></script>
+</body>
+</html>
