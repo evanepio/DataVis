@@ -5,9 +5,8 @@
     <title>Open Data - Historic sites visits on PEI 2004 to 2015</title>
     <meta charset="utf-8" />
 
-    <!-- vis.js stylesheet and code -->
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.css"/>
+    <!-- Chart.js stylesheet and code -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="style/main.css"/>
 </head>
@@ -19,8 +18,7 @@
     <div><a href="index.html">Back</a></div>
 </header>
 <article>
-    <div id="chart"></div>
-    <div id="controls"></div>
+    <canvas id="chart"></canvas>
 </article>
 
 <footer>
@@ -36,7 +34,6 @@
     <div><a href="index.html">Back to Index of Visualizations</a></div>
 </footer>
 <script type="text/javascript" src="scripts/dataLoader.js"></script>
-<script type="text/javascript" src="scripts/visibilityControls.js"></script>
-<script type="text/javascript" src="scripts/historicSiteVisitors.js"></script>
+<script type="text/javascript" src="scripts/historicChart.js"></script>
 </body>
 </html>
