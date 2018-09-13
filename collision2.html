@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Open Data - Vehicle Collision Data (2007-2015)</title>
+    <meta charset="utf-8" />
+
+    <!-- Promises, promises! -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bluebird/3.4.6/bluebird.core.js"></script>
+
+    <!-- vis.js stylesheet and code -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.css"/>
+
+    <link rel="stylesheet" type="text/css" href="style/main.css"/>
+</head>
+
+<body>
+<header>
+    <h1>Collision Data</h1>
+    <p>A visualization of vehicle collision data on PEI from 2007 to 2015.</p>
+    <div><a href="index.html">Back</a></div>
+</header>
+<article>
+    <div id="chart"></div>
+    <div id="controls"></div>
+</article>
+
+<footer>
+    <div>
+        A visualization of
+        <a href="https://www.princeedwardisland.ca/en/service/motor-vehicle-collisions-2007-2015-open-data">Motor Vehicle Collisions 2007-2015</a>,
+        <a href="https://www.princeedwardisland.ca/en/service/drivers-class-open-data">Drivers By Class</a>, and
+        <a href="https://www.princeedwardisland.ca/en/service/impaired-driving-convictions-1991-2016-open-data">Impaired Driving Convictions 1991-2016</a>
+        licensed under the <a
+            href="https://www.princeedwardisland.ca/en/information/finance/open-government-licence-prince-edward-island">
+        Open Government License - Prince Edward Island</a>
+    </div>
+    <div>HTML from <a href="https://github.com/swhalley/EducationAttendance">Education Attendance visualization</a>.</div>
+    <div>Using the <a href="http://visjs.org">vis.js</a> JavaScript library to render the graphs</div>
+    <div><a href="index.html">Back to Index of Visualizations</a></div>
+</footer>
+<script type="text/javascript" src="scripts/dataLoader.js"></script>
+<script type="text/javascript" src="scripts/visibilityControls.js"></script>
+<script type="text/javascript" src="scripts/collisionData2.js"></script>
+</body>
+</html>
